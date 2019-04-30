@@ -51,49 +51,55 @@ Python does not have a separate character type. Instead an expression like s[8] 
 ### String Slices
 The "slice" syntax is a handy way to refer to sub-parts of sequences -- typically strings and lists. The slice s[start:end] is the elements beginning at start and extending up to but not including end. Suppose we have s = "Hello"
 
-the string 'hello' with letter indexes 0 1 2 3 4
+![the string 'hello' with letter indexes 0 1 2 3 4](../image/python-string.png)
 
 * s[1:4] is 'ell' -- chars starting at index 1 and extending up to but not including index 4
 * s[1:] is 'ello' -- omitting either index defaults to the start or end of the string
 * s[:] is 'Hello' -- omitting both always gives us a copy of the whole thing (this is the pythonic way to copy a sequence like a string or list)
 * s[1:100] is 'ello' -- an index that is too big is truncated down to the string length
+
 The standard zero-based index numbers give easy access to chars near the start of the string. As an alternative, Python uses negative numbers to give easy access to the chars at the end of the string: s[-1] is the last char 'o', s[-2] is 'l' the next-to-last char, and so on. Negative index numbers count back from the end of the string:
 
-s[-1] is 'o' -- last char (1st from the end)
-s[-4] is 'e' -- 4th from the end
-s[:-3] is 'He' -- going up to but not including the last 3 chars.
-s[-3:] is 'llo' -- starting with the 3rd char from the end and extending to the end of the string.
+* s[-1] is 'o' -- last char (1st from the end)
+* s[-4] is 'e' -- 4th from the end
+* s[:-3] is 'He' -- going up to but not including the last 3 chars.
+* s[-3:] is 'llo' -- starting with the 3rd char from the end and extending to the end of the string.
+
 It is a neat truism of slices that for any index n, s[:n] + s[n:] == s. This works even for n negative or out of bounds. Or put another way s[:n] and s[n:] always partition the string into two string parts, conserving all the characters. As we'll see in the list section later, slices work with lists too.
 
-String %
+### String %
 Python has a printf()-like facility to put together a string. The % operator takes a printf-type format string on the left (%d int, %s string, %f/%g floating point), and the matching values in a tuple on the right (a tuple is made of values separated by commas, typically grouped inside parentheses):
-
+```python
   # % operator
   text = "%d little pigs come out, or I'll %s, and I'll %s, and I'll blow your %s down." % (3, 'huff', 'puff', 'house')
+```
 The above line is kind of long -- suppose you want to break it into separate lines. You cannot just split the line after the '%' as you might in other languages, since by default Python treats each line as a separate statement (on the plus side, this is why we don't need to type semi-colons on each line). To fix this, enclose the whole expression in an outer set of parenthesis -- then the expression is allowed to span multiple lines. This code-across-lines technique works with the various grouping constructs detailed below: ( ), [ ], { }.
-
+```python
   # Add parentheses to make the long line work:
   text = (
     "%d little pigs come out, or I'll %s, and I'll %s, and I'll blow your %s down."
     % (3, 'huff', 'puff', 'house'))
+```
 That's better, but the line is still a little long. Python lets you cut a line up into chunks, which it will then automatically concatenate. So, to make this line even shorter, we can do this:
-
+```python
   # Split the line into chunks, which are concatenated automatically by Python
   text = (
     "%d little pigs come out, "
     "or I'll %s, and I'll %s, "
     "and I'll blow your %s down."
     % (3, 'huff', 'puff', 'house'))
-i18n Strings (Unicode)
+```
+### i18n Strings (Unicode)
 Regular Python strings are *not* unicode, they are just plain bytes. To create a unicode string, use the 'u' prefix on the string literal:
-
+```python
 > ustring = u'A unicode \u018e string \xf1'
 > ustring
 u'A unicode \u018e string \xf1'
+```
 A unicode string is a different type of object from regular "str" string, but the unicode string is compatible (they share the common superclass "basestring"), and the various libraries such as regular expressions work correctly if passed a unicode string instead of a regular string.
 
 To convert a unicode string to bytes with an encoding such as 'utf-8', call the ustring.encode('utf-8') method on the unicode string. Going the other direction, the unicode(s, encoding) function converts encoded plain bytes to a unicode string:
-
+```python
 ## (ustring from above contains a unicode string)
 > s = ustring.encode('utf-8')
 > s
@@ -101,14 +107,14 @@ To convert a unicode string to bytes with an encoding such as 'utf-8', call the 
 > t = unicode(s, 'utf-8')             ## Convert bytes back to a unicode string
 > t == ustring                      ## It's the same as the original, yay!
 True
-
+```
 The built-in print does not work fully with unicode strings. You can encode() first to print in utf-8 or whatever. In the file-reading section, there's an example that shows how to open a text file with some encoding and read out unicode strings. Note that unicode handling is one area where Python 3000 is significantly cleaned up vs. Python 2.x behavior described here.
 
-If Statement
+### If Statement
 Python does not use { } to enclose blocks of code for if/loops/function etc.. Instead, Python uses the colon (:) and indentation/whitespace to group statements. The boolean test for an if does not need to be in parenthesis (big difference from C++/Java), and it can have *elif* and *else* clauses (mnemonic: the word "elif" is the same length as the word "else").
 
 Any value can be used as an if-test. The "zero" values all count as false: None, 0, empty string, empty list, empty dictionary. There is also a Boolean type with two values: True and False (converted to an int, these are 1 and 0). Python has the usual comparison operations: ==, !=, <, <=, >, >=. Unlike Java and C, == is overloaded to work correctly with strings. The boolean operators are the spelled out words *and*, *or*, *not* (Python does not use the C-style && || !). Here's what the code might look like for a policeman pulling over a speeder -- notice how each block of then/else statements starts with a : and the statements are grouped by their indentation:
-
+```python
   if speed >= 80:
     print 'License and registration please'
     if mood == 'terrible' or speed >= 100:
@@ -118,7 +124,9 @@ Any value can be used as an if-test. The "zero" values all count as false: None,
       write_ticket()
     else:
       print "Let's try to keep it under 80 ok?"
+```
 I find that omitting the ":" is my most common syntax mistake when typing in the above sort of code, probably since that's an additional thing to type vs. my C++/Java habits. Also, don't put the boolean test in parens -- that's a C/Java habit. If the code is short, you can put the code on the same line after ":", like this (this applies to functions, loops, etc. also), although some people feel it's more readable to space things out on separate lines.
-
+```python
   if speed >= 80: print 'You are so busted'
   else: print 'Have a nice day'
+```
