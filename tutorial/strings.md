@@ -19,7 +19,7 @@ Unlike Java, the '+' does not automatically convert numbers or other types to st
 For numbers, the standard operators, +, /, * work in the usual way. There is no ++ operator, but +=, -=, etc. work. If you want integer division, it is most correct to use 2 slashes -- e.g. 6 // 5 is 1 (previous to python 3000, a single / does int division with ints anyway, but moving forward // is the preferred way to indicate that you want int division.)
 
 The "print" operator prints out one or more python items followed by a newline (leave a trailing comma at the end of the items to inhibit the newline). A "raw" string literal is prefixed by an 'r' and passes all the chars through without special treatment of backslashes, so r'x\nx' evaluates to the length-4 string 'x\nx'. A 'u' prefix allows you to write a unicode string literal (Python has lots of other unicode support features -- see the docs below).
-
+```python
   raw = r'this\t\n and that'
 
   # this\t\n and that
@@ -30,31 +30,33 @@ The "print" operator prints out one or more python items followed by a newline (
 
   # It was the best of times.
   #   It was the worst of times.
-print multi
-String Methods
+  print multi
+```
+
+### String Methods
 Here are some of the most common string methods. A method is like a function, but it runs "on" an object. If the variable s is a string, then the code s.lower() runs the lower() method on that string object and returns the result (this idea of a method running on an object is one of the basic ideas that make up Object Oriented Programming, OOP). Here are some of the most common string methods:
 
-s.lower(), s.upper() -- returns the lowercase or uppercase version of the string
-s.strip() -- returns a string with whitespace removed from the start and end
-s.isalpha()/s.isdigit()/s.isspace()... -- tests if all the string chars are in the various character classes
-s.startswith('other'), s.endswith('other') -- tests if the string starts or ends with the given other string
-s.find('other') -- searches for the given other string (not a regular expression) within s, and returns the first index where it begins or -1 if not found
-s.replace('old', 'new') -- returns a string where all occurrences of 'old' have been replaced by 'new'
-s.split('delim') -- returns a list of substrings separated by the given delimiter. The delimiter is not a regular expression, it's just text. 'aaa,bbb,ccc'.split(',') -> ['aaa', 'bbb', 'ccc']. As a convenient special case s.split() (with no arguments) splits on all whitespace chars.
-s.join(list) -- opposite of split(), joins the elements in the given list together using the string as the delimiter. e.g. '---'.join(['aaa', 'bbb', 'ccc']) -> aaa---bbb---ccc
+* s.lower(), s.upper() -- returns the lowercase or uppercase version of the string
+* s.strip() -- returns a string with whitespace removed from the start and end
+* s.isalpha()/s.isdigit()/s.isspace()... -- tests if all the string chars are in the various character classes
+* s.startswith('other'), s.endswith('other') -- tests if the string starts or ends with the given other string
+* s.find('other') -- searches for the given other string (not a regular expression) within s, and returns the first index where it begins or -1 if not found
+* s.replace('old', 'new') -- returns a string where all occurrences of 'old' have been replaced by 'new'
+* s.split('delim') -- returns a list of substrings separated by the given delimiter. The delimiter is not a regular expression, it's just text. 'aaa,bbb,ccc'.split(',') -> ['aaa', 'bbb', 'ccc']. As a convenient special case s.split() (with no arguments) splits on all whitespace chars.
+* s.join(list) -- opposite of split(), joins the elements in the given list together using the string as the delimiter. e.g. '---'.join(['aaa', 'bbb', 'ccc']) -> aaa---bbb---ccc
 A google search for "python str" should lead you to the official python.org string methods which lists all the str methods.
 
 Python does not have a separate character type. Instead an expression like s[8] returns a string-length-1 containing the character. With that string-length-1, the operators ==, <=, ... all work as you would expect, so mostly you don't need to know that Python does not have a separate scalar "char" type.
 
-String Slices
+### String Slices
 The "slice" syntax is a handy way to refer to sub-parts of sequences -- typically strings and lists. The slice s[start:end] is the elements beginning at start and extending up to but not including end. Suppose we have s = "Hello"
 
 the string 'hello' with letter indexes 0 1 2 3 4
 
-s[1:4] is 'ell' -- chars starting at index 1 and extending up to but not including index 4
-s[1:] is 'ello' -- omitting either index defaults to the start or end of the string
-s[:] is 'Hello' -- omitting both always gives us a copy of the whole thing (this is the pythonic way to copy a sequence like a string or list)
-s[1:100] is 'ello' -- an index that is too big is truncated down to the string length
+* s[1:4] is 'ell' -- chars starting at index 1 and extending up to but not including index 4
+* s[1:] is 'ello' -- omitting either index defaults to the start or end of the string
+* s[:] is 'Hello' -- omitting both always gives us a copy of the whole thing (this is the pythonic way to copy a sequence like a string or list)
+* s[1:100] is 'ello' -- an index that is too big is truncated down to the string length
 The standard zero-based index numbers give easy access to chars near the start of the string. As an alternative, Python uses negative numbers to give easy access to the chars at the end of the string: s[-1] is the last char 'o', s[-2] is 'l' the next-to-last char, and so on. Negative index numbers count back from the end of the string:
 
 s[-1] is 'o' -- last char (1st from the end)
