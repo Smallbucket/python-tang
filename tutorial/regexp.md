@@ -1,4 +1,6 @@
 
+## Python Regular Expressions
+
 Regular expressions are a powerful language for matching text patterns. This page gives a basic introduction to regular expressions themselves sufficient for our Python exercises and shows how regular expressions work in Python. The Python "re" module provides regular expression support.
 In Python a regular expression search is typically written as:
 
@@ -17,11 +19,11 @@ The code match = re.search(pat, str) stores the search result in a variable name
 
 The 'r' at the start of the pattern string designates a python "raw" string which passes through backslashes without change which is very handy for regular expressions (Java needs this feature badly!). I recommend that you always write pattern strings with the 'r' just as a habit.
 
-Basic Patterns
+### Basic Patterns
 The power of regular expressions is that they can specify patterns, not just fixed characters. Here are the most basic patterns which match single chars:
 
-a, X, 9, < -- ordinary characters just match themselves exactly. The meta-characters which do not match themselves because they have special meanings are: . ^ $ * + ? { [ ] \ | ( ) (details below)
-. (a period) -- matches any single character except newline '\n'
+* a, X, 9, < -- ordinary characters just match themselves exactly. The meta-characters which do not match themselves because they have special meanings are: . ^ $ * + ? { [ ] \ | ( ) (details below)
+* . (a period) -- matches any single character except newline '\n'
 \w -- (lowercase w) matches a "word" character: a letter or digit or underbar [a-zA-Z0-9_]. Note that although "word" is the mnemonic for this, it only matches a single word char, not a whole word. \W (upper case W) matches any non-word character.
 \b -- boundary between word and non-word
 \s -- (lowercase s) matches a single whitespace character -- space, newline, return, tab, form [ \n\r\t\f]. \S (upper case S) matches any non-whitespace character.
