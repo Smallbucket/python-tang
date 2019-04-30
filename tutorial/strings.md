@@ -52,6 +52,9 @@ Python does not have a separate character type. Instead an expression like s[8] 
 The "slice" syntax is a handy way to refer to sub-parts of sequences -- typically strings and lists. The slice s[start:end] is the elements beginning at start and extending up to but not including end. Suppose we have s = "Hello"
 
 ![the string 'hello' with letter indexes 0 1 2 3 4](../image/python-string.png)
+<div style="align: center">
+<img src="../image/python-string.png" alt="the string 'hello' with letter indexes 0 1 2 3 4"/>
+</div>
 
 * s[1:4] is 'ell' -- chars starting at index 1 and extending up to but not including index 4
 * s[1:] is 'ello' -- omitting either index defaults to the start or end of the string
