@@ -51,12 +51,13 @@ Python does not have a separate character type. Instead an expression like s[8] 
 ### String Slices
 The "slice" syntax is a handy way to refer to sub-parts of sequences -- typically strings and lists. The slice s[start:end] is the elements beginning at start and extending up to but not including end. Suppose we have s = "Hello"
 
-the string 'hello' with letter indexes 0 1 2 3 4
+![the string 'hello' with letter indexes 0 1 2 3 4](../image/python-string.png)
 
 * s[1:4] is 'ell' -- chars starting at index 1 and extending up to but not including index 4
 * s[1:] is 'ello' -- omitting either index defaults to the start or end of the string
 * s[:] is 'Hello' -- omitting both always gives us a copy of the whole thing (this is the pythonic way to copy a sequence like a string or list)
 * s[1:100] is 'ello' -- an index that is too big is truncated down to the string length
+
 The standard zero-based index numbers give easy access to chars near the start of the string. As an alternative, Python uses negative numbers to give easy access to the chars at the end of the string: s[-1] is the last char 'o', s[-2] is 'l' the next-to-last char, and so on. Negative index numbers count back from the end of the string:
 
 s[-1] is 'o' -- last char (1st from the end)
