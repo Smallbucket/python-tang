@@ -1,10 +1,11 @@
-Python Lists
+## Python Lists
 Python has a great built-in list type named "list". List literals are written within square brackets [ ]. Lists work similarly to strings -- use the len() function and square brackets [ ] to access data, with the first element at index 0. (See the official python.org list docs.)
-
+```python
   colors = ['red', 'blue', 'green']
   print colors[0]    ## red
   print colors[2]    ## green
   print len(colors)  ## 3
+```  
 list of strings 'red' 'blue 'green'
 
 Assignment with an = on lists does not make a copy. Instead, assignment makes the two variables point to the one list in memory.
