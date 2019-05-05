@@ -6,7 +6,7 @@ Python has a great built-in list type named "list". List literals are written wi
   print colors[2]    ## green
   print len(colors)  ## 3
 ```  
-list of strings 'red' 'blue 'green'
+![list of strings 'red' 'blue 'green'](../image/list1.png)    
 
 Assignment with an = on lists does not make a copy. Instead, assignment makes the two variables point to the one list in memory.
 
